@@ -1,0 +1,2 @@
+# LISTJUALANTAN
+amanahygy
