@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>TANN STORE - DARK MARKET</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #0b0b0b;
+            background-image: radial-gradient(circle at 20% 30%, #1a1a1a, #000000);
+            min-height: 100vh;
+            padding: 30px 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1300px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff0040, #ff7700, #ff0040);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradasi 4s ease-in-out infinite;
+            text-shadow: 0 0 30px #ff004066;
+            letter-spacing: 6px;
+        }
+
+        .header p {
+            color: #aaa;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            border-top: 1px solid #ff004066;
+            display: inline-block;
+            padding-top: 10px;
+        }
+
+        @keyframes gradasi {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid #2a2a2a;
+            border-radius: 28px;
+            padding: 25px 20px 20px;
+            transition: 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #ff0040, #ff7700, #ff0040);
+            background-size: 300% 300%;
+            z-index: -1;
+            border-radius: 30px;
+            opacity: 0;
+            transition: 0.5s;
+            animation: gradasi 4s infinite;
+        }
+
+        .card:hover::before {
+            opacity: 0.7;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #ff0040;
+            box-shadow: 0 0 40px #ff004066;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ff0040;
+            color: #fff;
+            font-weight: 800;
+            font-size: 0.7rem;
+            padding: 4px 16px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            box-shadow: 0 0 20px #ff004088;
+        }
+
+        .card h2 {
+            color: #fff;
+            font-size: 1.9rem;
+            margin: 10px 0 15px;
+            border-left: 4px solid #ff0040;
+            padding-left: 12px;
+        }
+
+        .card h2 i {
+            margin-right: 10px;
+            color: #ff7700;
+        }
+
+        .price-box {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-left: 4px solid #ff7700;
+        }
+
+        .price-box p {
+            color: #ddd;
+            font-size: 0.95rem;
+            margin: 5px 0;
+        }
+
+        .price-box strong {
+            color: #ff7700;
+            font-weight: 700;
+        }
+
+        .benefit {
+            margin: 15px 0;
+        }
+
+        .benefit p {
+            color: #bbb;
+            font-size: 0.95rem;
+            padding: 4px 0;
+        }
+
+        .benefit i {
+            color: #00ff88;
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .feature-list {
+            background: #111;
+            border-radius: 14px;
+            padding: 12px 15px;
+            margin: 12px 0;
+        }
+
+        .feature-list li {
+            list-style: none;
+            color: #ccc;
+            padding: 5px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list i {
+            color: #ff7700;
+            margin-right: 10px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 12px 10px;
+            border-radius: 40px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .btn-telegram {
+            background: #0088cc;
+            color: #fff;
+        }
+
+        .btn-telegram:hover {
+            background: #006699;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #0088cc88;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1da851;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #25D36688;
+        }
+
+        .btn-copy {
+            background: #444;
+            color: #fff;
+            flex: 0.5;
+            min-width: 50px;
+        }
+
+        .btn-copy:hover {
+            background: #666;
+            transform: scale(1.05);
+        }
+
+        .btn i {
+            font-size: 1.3rem;
+        }
+
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            color: #444;
+            font-size: 0.9rem;
+            border-top: 1px solid #1a1a1a;
+            padding-top: 25px;
+            letter-spacing: 1px;
+        }
+
+        .footer i {
+            color: #ff0040;
+        }
+
+        .promo-banner {
+            background: linear-gradient(135deg, #ff004033, #ff770033);
+            border: 1px solid #ff004066;
+            border-radius: 20px;
+            padding: 20px 25px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .promo-banner a {
+            color: #ff7700;
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 2px dashed #ff7700;
+        }
+
+        .promo-banner a:hover {
+            color: #ffaa44;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2.5rem;
+                letter-spacing: 3px;
+            }
+            .card h2 {
+                font-size: 1.5rem;
+            }
+            .btn {
+                min-width: 80px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>🛒 TANN STORE</h1>
+        <p>⚡ DARK MARKET • PREMIUM TOOLS ⚡</p>
+    </div>
+
+    <!-- GRID PRODUK -->
+    <div class="product-grid">
+
+        <!-- ===== 1. MURBUG ===== -->
+        <div class="card">
+            <span class="badge">🔥 BEST SELLER</span>
+            <h2><i class="fas fa-bolt"></i> MURBUG VIA TELEGRAM</h2>
+            <div class="price-box">
+                <p><strong>💸 PRICE LIST</strong></p>
+                <p>• Member Permanen : 5K</p>
+                <p>• Reseller Permanen : 10K</p>
+                <p>• Partner Permanen : 15K</p>
+            </div>
+            <div class="benefit">
+                <p><i class="fas fa-check-circle"></i> Bug WA sepuasnya</p>
+                <p><i class="fas fa-check-circle"></i> No Jeda</p>
+                <p><i class="fas fa-check-circle"></i> No Ampas</p>
+                <p><i class="fas fa-check-circle"></i> Bot ON 24 Jam</p>
+                <p><i class="fas fa-check-circle"></i> Sender ON 24 Jam</p>
+            </div>
+            <!-- BARIS INI DIHAPUS SESUAI PERMINTAAN LO -->
+            <div class="btn-group">
+                <a href="https://t.me/Tannmbut" target="_blank" class="btn btn-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                <a href="https://wa.me/6285353154795?text=Halo%20Tann%20Store%2C%20saya%20minat%20MURBUG" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <button class="btn btn-copy" onclick="copyNomor('6285353154795')"><i class="fas fa-copy"></i></button>
+            </div>
+        </div>
+
+        <!-- ===== 2. DADOS INFINITY ===== -->
+        <div class="card">
+            <span class="badge">🔥 BEST SELLER</span>
+            <h2><i class="fas fa-dice"></i> APK DADOS INFINITY</h2>
+            <div class="price-box">
+                <p><strong>🚀 Harga Murah</strong></p>
+                <p>• 1 Hari : 5K</p>
+                <p>• 1 Minggu : 10K</p>
+                <p>• 1 Bulan : 15K</p>
+                <p>• Permanen : 20K</p>
+            </div>
+            <div class="benefit">
+                <p><i class="fas fa-check-circle"></i> Get Murbug</p>
+                <p><i class="fas fa-check-circle"></i> Get 1 Panel Unli</p>
+                <p><i class="fas fa-check-circle"></i> Get Promote</p>
+                <p><i class="fas fa-check-circle"></i> Jadi Bestie Gw 🗿</p>
+            </div>
+            <p style="color:#888; font-size:0.9rem; margin-top:8px;">📌 Stok Aman • Harga Bersahabat 📩 Minat? PM aja langsung! 🔥</p>
+            <div class="btn-group">
+                <a href="https://t.me/Tannmbut" target="_blank" class="btn btn-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                <a href="https://wa.me/6285353154795?text=Halo%20Tann%20Store%2C%20saya%20minat%20DADOS%20INFINITY" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <button class="btn btn-copy" onclick="copyNomor('6285353154795')"><i class="fas fa-copy"></i></button>
+            </div>
+        </div>
+
+        <!-- ===== 3. OVALIUM GHOST ===== -->
+        <div class="card">
+            <span class="badge">🔥 BEST SELLER</span>
+            <h2><i class="fas fa-ghost"></i> OVALIUM GHOST</h2>
+            <p style="color:#aaa; margin-bottom:10px;">Premium APK + Script Bug WA via Telegram</p>
+            <div class="price-box">
+                <p><strong>💰 Price</strong></p>
+                <p>✅ Full Access Permanen — Rp30.000</p>
+            </div>
+            <div class="feature-list">
+                <li><i class="fas fa-bolt"></i> Specter Delay (Free Spam)</li>
+                <li><i class="fas fa-bolt"></i> SpamXDelay (Free Spam)</li>
+                <li><i class="fas fa-bolt"></i> Blank Device</li>
+                <li><i class="fas fa-bolt"></i> Invisible iPhone</li>
+                <li><i class="fas fa-bolt"></i> Delay With Kuota</li>
+                <li><i class="fas fa-bolt"></i> Super Hard Delay</li>
+                <li><i class="fas fa-bolt"></i> Invisible Delay Hard</li>
+            </div>
+            <div class="benefit">
+                <p><i class="fas fa-check-circle"></i> Punya Bot bug wa private</p>
+                <p><i class="fas fa-check-circle"></i> Bisa open Murbug dan balmod</p>
+                <p><i class="fas fa-check-circle"></i> Free 1 Panel unlimited</p>
+                <p><i class="fas fa-check-circle"></i> Free admin murbug tan</p>
+            </div>
+            <div class="btn-group">
+                <a href="https://t.me/Tannmbut" target="_blank" class="btn btn-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                <a href="https://wa.me/6285353154795?text=Halo%20Tann%20Store%2C%20saya%20minat%20OVALIUM%20GHOST" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <button class="btn btn-copy" onclick="copyNomor('6285353154795')"><i class="fas fa-copy"></i></button>
+            </div>
+        </div>
+
+        <!-- ===== 4. GLORY EXITUS ===== -->
+        <div class="card">
+            <span class="badge">🔥 BEST SELLER</span>
+            <h2><i class="fas fa-crown"></i> Glory Exitus</h2>
+            <div class="price-box">
+                <p><strong>Price</strong></p>
+                <p>Full update : 15k</p>
+            </div>
+            <div class="benefit">
+                <p><i class="fas fa-check-circle"></i> Free panel unli</p>
+                <p><i class="fas fa-check-circle"></i> Get 1 nokos</p>
+                <p><i class="fas fa-check-circle"></i> Get murbug</p>
+            </div>
+            <div class="btn-group">
+                <a href="https://t.me/Tannmbut" target="_blank" class="btn btn-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                <a href="https://wa.me/6285353154795?text=Halo%20Tann%20Store%2C%20saya%20minat%20GLORY%20EXITUS" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <button class="btn btn-copy" onclick="copyNomor('6285353154795')"><i class="fas fa-copy"></i></button>
+            </div>
+        </div>
+
+        <!-- ===== 5. OTAX ===== -->
+        <div class="card">
+            <span class="badge">🔥 BEST SELLER</span>
+            <h2><i class="fas fa-fire"></i> OTAX</h2>
+            <div class="price-box">
+                <p><strong>💥 LIST HARGA SC + APK</strong></p>
+                <p>🔥 5K / Hari</p>
+                <p>🔥 40K / 1 Bulan</p>
+                <p>🔥 60K / Permanent</p>
+                <p style="color:#ff7700;">✨ Full Up jika punya Telegram</p>
+            </div>
+            <p style="color:#888; font-size:0.8rem;">⚠️ Role di atas adalah MEMBER. Untuk akses role lebih tinggi, wajib mempunyai Telegram.</p>
+            <hr style="border-color:#222; margin:12px 0;">
+            <div class="price-box">
+                <p><strong>💵 FULL UP — 60K</strong> (SC + APK)</p>
+                <p><i class="fas fa-check-circle" style="color:#00ff88;"></i> Akses Addtoken 1x</p>
+                <p><i class="fas fa-check-circle" style="color:#00ff88;"></i> Akses membuat akun APK 1x</p>
+            </div>
+            <div class="price-box">
+                <p><strong>💵 RESELLER — 80K</strong> (SC + APK)</p>
+                <p><i class="fas fa-check-circle" style="color:#00ff88;"></i> Bisa menjual SC + APK role Full Up</p>
+                <p><i class="fas fa-check-circle" style="color:#00ff88;"></i> Buyer wajib punya Telegram</p>
+            </div>
+            <div class="price-box">
+                <p><strong>💵 PT — 100K</strong></p>
+                <p><i class="fas fa-check-circle" style="color:#00ff88;"></i> Mendapat function terbaru saat update</p>
+                <p><i class="fas fa-check-circle" style="color:#00ff88;"></i> Akses SC APK lainnya</p>
+                <p><i class="fas fa-check-circle" style="color:#00ff88;"></i> Mendapat case NTBA</p>
+                <p><i class="fas fa-check-circle" style="color:#00ff88;"></i> Mendapat pengalaman & sharing dari member/PT lain</p>
+                <p><i class="fas fa-check-circle" style="color:#00ff88;"></i> Bisa jual role Reseller</p>
+            </div>
+            <div class="btn-group">
+                <a href="https://t.me/Tannmbut" target="_blank" class="btn btn-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                <a href="https://wa.me/6285353154795?text=Halo%20Tann%20Store%2C%20saya%20minat%20OTAX" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <button class="btn btn-copy" onclick="copyNomor('6285353154795')"><i class="fas fa-copy"></i></button>
+            </div>
+        </div>
+
+        <!-- ===== 6. LOSメEMPIRE ===== -->
+        <div class="card">
+            <span class="badge">🔥 BEST SELLER</span>
+            <h2><i class="fas fa-skull"></i> LOSメEMPIRE</h2>
+            <p style="color:#aaa; margin-bottom:5px;">「 ULTRA NEW GEN 」</p>
+            <p style="color:#ff7700; font-weight:700;">“POWER • SPEED • DOMINASI”</p>
+            <div class="price-box" style="border-left-color:#ff0040;">
+                <p><strong>💸 OFFICIAL PRICE</strong></p>
+                <p>🛒 FULL UP — 15K</p>
+            </div>
+            <div class="feature-list">
+                <li><i class="fas fa-skull"></i> Invisible Delay Attack</li>
+                <li><i class="fas fa-skull"></i> Hard Spam Ultra V2</li>
+                <li><i class="fas fa-skull"></i> Combo Freeze Crash</li>
+                <li><i class="fas fa-skull"></i> Blank Invisible Delay</li>
+                <li><i class="fas fa-skull"></i> Ultra ForceClose V5</li>
+                <li><i class="fas fa-skull"></i> Invisible Hard Spam FC</li>
+            </div>
+            <div class="benefit">
+                <p><i class="fas fa-check-circle"></i> ANTI KENON SYSTEM</p>
+                <p><i class="fas fa-check-circle"></i> FREE UPDATE FOREVER</p>
+                <p><i class="fas fa-check-circle"></i> FAST RESPON 24/7</p>
+                <p><i class="fas fa-check-circle"></i> SC PRIVATE • NO SHARE</p>
+                <p><i class="fas fa-check-circle"></i> PERMANENT ACCESS</p>
+                <p><i class="fas fa-check-circle"></i> SMOOTH • FAST • STABLE</p>
+            </div>
+            <p style="color:#ff7700; font-weight:700; text-align:center; margin-top:8px;">“SILENT BUT DEADLY”</p>
+            <div class="btn-group">
+                <a href="https://t.me/Tannmbut" target="_blank" class="btn btn-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                <a href="https://wa.me/6285353154795?text=Halo%20Tann%20Store%2C%20saya%20minat%20LOSEMPIRE" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <button class="btn btn-copy" onclick="copyNomor('6285353154795')"><i class="fas fa-copy"></i></button>
+            </div>
+        </div>
+
+        <!-- ===== 7. PANEL PTERODACTYL (PRODUK BARU) ===== -->
+        <div class="card">
+            <span class="badge">🔥 BEST SELLER</span>
+            <h2><i class="fas fa-server"></i> PANEL PTERODACTYL</h2>
+            <div class="price-box">
+                <p><strong>💸 PRICE</strong></p>
+                <p>• Panel Unlimited : 2K</p>
+            </div>
+            <div class="benefit">
+                <p><i class="fas fa-check-circle"></i> Garansi 1 Minggu</p>
+                <p><i class="fas fa-check-circle"></i> Bisa Req Nama</p>
+                <p><i class="fas fa-check-circle"></i> Panel Lancar Anti Lag</p>
+            </div>
+            <div class="btn-group">
+                <a href="https://t.me/Tannmbut" target="_blank" class="btn btn-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                <a href="https://wa.me/6285353154795?text=Halo%20Tann%20Store%2C%20saya%20minat%20PANEL%20PTERODACTYL" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a
